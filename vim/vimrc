@@ -1,0 +1,127 @@
+" basic
+set nocompatible
+filetype off
+set wildmenu
+set foldmethod=manual
+set helplang=cn
+set sw=4
+set sta
+set backspace=2
+syntax enable
+set number 
+filetype indent on
+filetype plugin on
+set completeopt=longest,menu
+set history=1000
+set background=dark
+syntax on
+set autoindent
+set smartindent
+set cin
+set tabstop=4
+set showmatch
+set ruler
+set incsearch
+set winaltkeys=no
+set laststatus=2
+set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P> 
+set hidden
+autocmd FileType python setlocal et sta sw=4 sts=4
+
+" codecs
+set enc=utf-8
+set fencs=utf-8,gbk
+set fileencodings=utf-8,gbk,gb18030,utf-16,big5
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" Simple navigation and editing key bindings from emacs, for Vim.
+" Inspired by a much more comprehensive plugin: Vimacs, by Andre Pang.
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:home()
+  let start_col = col('.')
+  normal! ^
+  if col('.') == start_col
+    normal! 0
+  endif
+  return ''
+endfunction
+
+function! s:kill_line()
+  let [text_before_cursor, text_after_cursor] = s:split_line_text_at_cursor()
+  if len(text_after_cursor) == 0
+    normal! J
+  else
+    call setline(line('.'), text_before_cursor)
+  endif
+  return ''
+endfunction
+
+function! s:split_line_text_at_cursor()
+  let line_text = getline(line('.'))
+  let text_after_cursor  = line_text[col('.')-1 :]
+  let text_before_cursor = (col('.') > 1) ? line_text[: col('.')-2] : ''
+  return [text_before_cursor, text_after_cursor]
+endfunction
+
+inoremap <silent> <Plug>emacs_home <C-o>:call <SID>home()<CR>
+inoremap <silent> <Plug>emacs_kill_line <C-r>=<SID>kill_line()<CR>
+inoremap <silent> <Plug>emacs_delete_word_forwards  <C-o>de
+inoremap <silent> <Plug>emacs_delete_word_backwards <Space><Left><C-o>db<Del>
+
+" on macvim, use option as meta key
+if has("gui_macvim")
+  set macmeta
+endif
+
+" insert mode
+imap <C-b> <Left>
+imap <C-f> <Right>
+imap <C-a> <Plug>emacs_home
+imap <C-e> <End>
+imap <C-n> <Down>
+imap <C-p> <Up>
+imap <M-b> <C-o>b
+imap <M-f> <C-o>e<Right>
+imap <M-a> <C-o>{
+imap <M-e> <C-o>}
+imap <C-d> <Del>
+imap <C-h> <BS>
+imap <M-d> <Esc>dwi
+imap <C-k> <Plug>emacs_kill_line
+
+imap <C-x><C-s> <Esc>:w<Cr>i
+imap <C-x><C-u> <Esc>ui
+imap <C-x><C-f> <Esc>:e<Space>
+
+" command line mode
+cmap <C-p> <Up>
+cmap <C-n> <Down>
+cmap <C-b> <Left> cmap <C-f> <Right>
+cmap <C-a> <Home>
+cmap <C-e> <End>
+cmap <M-f> <S-Right>
+cmap <M-b> <S-Left>
+cmap <M-a> <Home>
+cmap <M-e> <End>
+cnoremap <C-d> <Del>
+cnoremap <C-h> <BS>
+cnoremap <M-h> <C-w>
+cnoremap <M-d> <C-f>de<C-c>
+cnoremap <C-k> <C-f>D<C-c><End>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+"       Vundle - bundle manager for vim
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
+" custom bundle
+Bundle 'SuperTab-continued.'
+Bundle 'Command-T'
+Bundle 'Solarized'
+filetype plugin indent on
+colorscheme solarized
