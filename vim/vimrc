@@ -3,6 +3,10 @@ set nocompatible
 let mapleader=","
 set hidden
 
+" Quickly edit/reload the vimrc file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
 filetype off
 set mouse=a
 set nowrap
@@ -10,7 +14,7 @@ set wildmenu
 set foldmethod=manual 
 set helplang=cn
 set sw=4
-set sta
+set sta 
 set backspace=2
 syntax enable
 set number 
@@ -18,7 +22,6 @@ filetype indent on
 filetype plugin on
 set completeopt=longest,menu
 set history=1000
-set background=dark
 syntax on
 set autoindent
 set copyindent
@@ -36,7 +39,6 @@ set hlsearch
 set incsearch
 set winaltkeys=no
 set laststatus=2
-
 set history=1000
 set undolevels=1000
 set wildignore=*.swp,*.bak,*.pyc,*.class
@@ -46,9 +48,11 @@ set noerrorbells
 set nobackup
 set noswapfile
 
-" Quickly edit/reload the vimrc file
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
+" Codecs
+set enc=utf-8
+set fencs=utf-8,gbk
+set fileencodings=utf-8,gbk,gb18030,utf-16,big5
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
@@ -130,11 +134,6 @@ cnoremap <M-d> <C-f>de<C-c>
 cnoremap <C-k> <C-f>D<C-c><End>
 autocmd FileType python setlocal et sta sw=4 sts=4
 
-" codecs
-set enc=utf-8
-set fencs=utf-8,gbk
-set fileencodings=utf-8,gbk,gb18030,utf-16,big5
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 "
 "       Vundle - bundle manager for vim
@@ -145,8 +144,9 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 " custom bundle
 Bundle 'Solarized'
+Bundle 'railscasts'
 Bundle 'SuperTab-continued.'
-Bundle 'Command-T'
+Bundle 'ctrlp.vim'
 Bundle 'c.vim'
 Bundle 'a.vim'
 Bundle 'taglist.vim'
@@ -154,8 +154,11 @@ Bundle 'Auto-Pairs'
 Bundle 'statusline.vim'
 Bundle 'vimtips_with_comments'
 Bundle 'The-NERD-Commenter'
+Bundle 'quit-another-window'
+Bundle 'AutoAlign'
+Bundle 'Align'
+Bundle 'pythoncomplete'
 filetype plugin indent on
-colorscheme solarized
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
@@ -167,104 +170,16 @@ let Tlist_Exit_OnlyWindow=1
 let Tlist_Use_Right_Window=1
 map <silent> <leader>l :TlistToggle<cr>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 
+"                       Appearence
 "
-" Simple navigation and editing key bindings from emacs, for Vim.
-" Inspired by a much more comprehensive plugin: Vimacs, by Andre Pang.
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! s:home()
-    let start_col = col('.')
-    normal! ^
-    if col('.') == start_col
-        normal! 0
-    endif
-    return ''
-endfunction
-
-function! s:kill_line()
-    let [text_before_cursor, text_after_cursor] = s:split_line_text_at_cursor()
-    if len(text_after_cursor) == 0
-        normal! J
-    else call setline(line('.'), text_before_cursor)
-    endif
-    return ''
-endfunction
-
-function! s:split_line_text_at_cursor()
-    let line_text = getline(line('.'))
-    let text_after_cursor  = line_text[col('.')-1 :]
-    let text_before_cursor = (col('.') > 1) ? line_text[: col('.')-2] : ''
-    return [text_before_cursor, text_after_cursor]
-endfunction
-
-inoremap <silent> <Plug>emacs_home <C-o>:call <SID>home()<CR>
-inoremap <silent> <Plug>emacs_kill_line <C-r>=<SID>kill_line()<CR>
-inoremap <silent> <Plug>emacs_delete_word_forwards  <C-o>de
-inoremap <silent> <Plug>emacs_delete_word_backwards <Space><Left><C-o>db<Del>
-
-" On macvim, use option as meta key
-if has("gui_macvim")
-    set macmeta
-endif
-
-" Insert mode
-imap <C-b> <Left>
-imap <C-f> <Right>
-imap <C-a> <Plug>emacs_home
-imap <C-e> <End>
-imap <C-n> <Down>
-imap <C-p> <Up>
-imap <M-b> <C-o>b
-imap <M-f> <C-o>e<Right>
-imap <M-a> <C-o>{
-imap <M-e> <C-o>}
-imap <C-d> <Del>
-imap <C-h> <BS>
-imap <M-d> <Esc>dwi
-imap <C-k> <Esc><Right>d$a
-"imap <C-k> <Plug>emacs_kill_line
-
-imap <C-x><C-s> <Esc>:w<Cr>a
-imap <C-x>u <Esc>ua
-imap <C-x><C-f> <Esc>:e<Space>
-
-" Command line mode
-cmap <C-p> <Up>
-cmap <C-n> <Down>
-cmap <C-b> <Left> 
-cmap <C-f> <Right>
-cmap <C-a> <Home>
-cmap <C-e> <End>
-cmap <M-f> <S-Right>
-cmap <M-b> <S-Left>
-cmap <M-a> <Home>
-cmap <M-e> <End>
-cnoremap <C-d> <Del>
-cnoremap <C-h> <BS>
-cnoremap <M-h> <C-w>
-cnoremap <M-d> <C-f>de<C-c>
-cnoremap <C-k> <C-f>D<C-c><End>
-
-" Command-T window
-let g:CommandTCursorLeftMap  = ['<Left>',  '<C-b>']
-let g:CommandTCursorRightMap = ['<Right>', '<C-f>']
-let g:CommandTBackspaceMap   = ['<BS>',    '<C-h>']
-let g:CommandTDeleteMap      = ['<Del>',   '<C-d>']
-
-" Normal mode
-if exists('g:emacs_bindings_map_normal_mode') && g:emacs_bindings_map_normal_mode
-    map <C-p> gk
-    map <C-n> gj
-    map <C-b> h
-    map <C-f> l
-    map <C-a> <Plug>emacs_home
-    map <C-e> $
-    map <M-b> b
-    map <M-f> e
-    map <M-a> {
-    map <M-e> }
-endif
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set go-=m "fix the black botterm border in xmonad 
+set go-=T
+set guifont=Inconsolata-g\ Bold\ 10
+set background=dark
+colorscheme railscasts
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
