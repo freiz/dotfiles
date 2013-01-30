@@ -144,20 +144,25 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 " custom bundle
 Bundle 'Solarized'
+Bundle 'Lokaltog/vim-powerline'
 Bundle 'railscasts'
 Bundle 'SuperTab-continued.'
-Bundle 'ctrlp.vim'
+Bundle 'kien/ctrlp.vim'
 Bundle 'c.vim'
 Bundle 'a.vim'
 Bundle 'taglist.vim'
 Bundle 'Auto-Pairs'
-Bundle 'statusline.vim'
-Bundle 'vimtips_with_comments'
+" Bundle 'statusline.vim' " second choice of vim-powerline
 Bundle 'The-NERD-Commenter'
 Bundle 'quit-another-window'
 Bundle 'AutoAlign'
 Bundle 'Align'
 Bundle 'pythoncomplete'
+Bundle 'Markdown'
+Bundle 'Markdown-syntax'
+Bundle 'vimlatex'
+Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
+Bundle 'klen/python-mode'
 filetype plugin indent on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -177,9 +182,14 @@ map <silent> <leader>l :TlistToggle<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set go-=m "fix the black botterm border in xmonad 
 set go-=T
-set guifont=Inconsolata-g\ Bold\ 10
+if has("mac")
+    set guifont=Inconsolata-g:h12
+elseif has("unix")
+    set guifont=Inconsolata-g\ Bold\ 10
+endif
 set background=dark
 colorscheme railscasts
+let g:Powerline_symbols='fancy'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
