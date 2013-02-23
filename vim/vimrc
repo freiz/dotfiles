@@ -9,12 +9,15 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 filetype off
 set mouse=a
-set nowrap
+set wrap
+set linebreak
+set nolist
 set wildmenu
 set foldmethod=manual 
 set helplang=cn
-set sw=4
+set sw=2
 set sta 
+set tabstop=2
 set backspace=2
 syntax enable
 set number 
@@ -27,7 +30,6 @@ set autoindent
 set copyindent
 set smartindent
 set cin
-set tabstop=4
 set smarttab
 set expandtab
 set backspace=indent,eol,start
@@ -56,35 +58,33 @@ set fileencodings=utf-8,gbk,gb18030,utf-16,big5
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
-" Simple navigation and editing key bindings from emacs, for Vim.
-" Inspired by a much more comprehensive plugin: Vimacs, by Andre Pang.
-"
+" Simple navigation and editing key bindings from emacs, for Vim.  " Inspired by a much more comprehensive plugin: Vimacs, by Andre Pang.
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! s:home()
-    let start_col = col('.')
-    normal! ^
-    if col('.') == start_col
-        normal! 0
-    endif
-    return ''
+  let start_col = col('.')
+  normal! ^
+  if col('.') == start_col
+    normal! 0
+  endif
+  return ''
 endfunction
 
 function! s:kill_line()
-    let [text_before_cursor, text_after_cursor] = s:split_line_text_at_cursor()
-    if len(text_after_cursor) == 0
-        normal! J
-    else
-        call setline(line('.'), text_before_cursor)
-    endif
-    return ''
+  let [text_before_cursor, text_after_cursor] = s:split_line_text_at_cursor()
+  if len(text_after_cursor) == 0
+    normal! J
+  else
+    call setline(line('.'), text_before_cursor)
+  endif
+  return ''
 endfunction
 
 function! s:split_line_text_at_cursor()
-    let line_text = getline(line('.'))
-    let text_after_cursor  = line_text[col('.')-1 :]
-    let text_before_cursor = (col('.') > 1) ? line_text[: col('.')-2] : ''
-    return [text_before_cursor, text_after_cursor]
+  let line_text = getline(line('.'))
+  let text_after_cursor  = line_text[col('.')-1 :]
+  let text_before_cursor = (col('.') > 1) ? line_text[: col('.')-2] : ''
+  return [text_before_cursor, text_after_cursor]
 endfunction
 
 inoremap <silent> <Plug>emacs_home <C-o>:call <SID>home()<CR>
@@ -94,7 +94,7 @@ inoremap <silent> <Plug>emacs_delete_word_backwards <Space><Left><C-o>db<Del>
 
 " on macvim, use option as meta key
 if has("gui_macvim")
-    set macmeta
+  set macmeta
 endif
 
 " insert mode
@@ -148,6 +148,7 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'railscasts'
 Bundle 'SuperTab-continued.'
 Bundle 'kien/ctrlp.vim'
+Bundle 'scrooloose/nerdtree'
 Bundle 'c.vim'
 Bundle 'a.vim'
 Bundle 'taglist.vim'
@@ -163,6 +164,14 @@ Bundle 'Markdown-syntax'
 Bundle 'vimlatex'
 Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
 Bundle 'klen/python-mode'
+Bundle 'mattn/zencoding-vim'
+" Ruby
+Bundle 'vim-ruby/vim-ruby'
+" Rails
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-bundler'
+" Coffee Script
+Bundle 'kchmck/vim-coffee-script'
 filetype plugin indent on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -181,11 +190,12 @@ map <silent> <leader>l :TlistToggle<cr>
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set go-=m "fix the black botterm border in xmonad 
+set cursorline
 set go-=T
 if has("mac")
-    set guifont=Inconsolata-g:h12
+  set guifont=Inconsolata-g:h12
 elseif has("unix")
-    set guifont=Inconsolata-g\ Bold\ 10
+  set guifont=SourceCodePro\ Semibold\ 11
 endif
 set background=dark
 colorscheme railscasts
@@ -213,3 +223,7 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
+" NerdTree Setting
+autocmd vimenter * NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+map <silent> <leader>n :NERDTreeToggle<cr>
