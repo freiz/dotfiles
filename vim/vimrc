@@ -1,4 +1,4 @@
-" basic
+" Basic
 set nocompatible
 let mapleader=","
 set hidden
@@ -58,7 +58,8 @@ set fileencodings=utf-8,gbk,gb18030,utf-16,big5
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
-" Simple navigation and editing key bindings from emacs, for Vim.  " Inspired by a much more comprehensive plugin: Vimacs, by Andre Pang.
+" Simple navigation and editing key bindings from emacs, for Vim.  
+" Inspired by a much more comprehensive plugin: Vimacs, by Andre Pang.
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! s:home()
@@ -97,7 +98,7 @@ if has("gui_macvim")
   set macmeta
 endif
 
-" insert mode
+" Insert mode
 imap <C-b> <Left>
 imap <C-f> <Right>
 imap <C-a> <Plug>emacs_home
@@ -117,7 +118,7 @@ imap <C-x><C-s> <Esc>:w<Cr>i
 imap <C-x><C-u> <Esc>ui
 imap <C-x><C-f> <Esc>:e<Space>
 
-" command line mode
+" Command line mode
 cmap <C-p> <Up>
 cmap <C-n> <Down>
 cmap <C-b> <Left> cmap <C-f> <Right>
@@ -132,7 +133,6 @@ cnoremap <C-h> <BS>
 cnoremap <M-h> <C-w>
 cnoremap <M-d> <C-f>de<C-c>
 cnoremap <C-k> <C-f>D<C-c><End>
-autocmd FileType python setlocal et sta sw=4 sts=4
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 "
@@ -147,6 +147,11 @@ Bundle 'Solarized'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'railscasts'
 Bundle 'SuperTab-continued.'
+" Snipmate and depends
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "honza/snipmate-snippets"
+Bundle 'garbas/vim-snipmate'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'c.vim'
@@ -223,7 +228,14 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
+" Quick jump to buffer list
+nnoremap <leader>b :buffers<CR>:buffer<Space>
+
 " NerdTree Setting
-autocmd vimenter * NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 map <silent> <leader>n :NERDTreeToggle<cr>
+
+" Language specific settings
+
+" Python
+autocmd FileType python setlocal et sta sw=4 sts=4
