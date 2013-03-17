@@ -1,241 +1,233 @@
-" Basic
-set nocompatible
-let mapleader=","
-set hidden
+" Modeline and Notes {
+" vim: set foldmethod=marker foldmarker={,} foldlevel=0:
+" }
+" Environment {
+  " Basic {
+    set nocompatible
+    let mapleader=","
+    set hidden
+    filetype off
+    set mouse=a
+    set wrap
+    set linebreak
+    set nolist
+    set wildmenu
+    set helplang=cn
+    set sw=2
+    set aw
+    set sta 
+    set tabstop=2
+    set backspace=2
+    syntax enable
+    set number 
+    filetype indent on
+    filetype plugin on
+    set completeopt=longest,menu
+    set history=1000
+    syntax on
+    set autoindent
+    set copyindent
+    set smartindent
+    set cin
+    set smarttab
+    set expandtab
+    set backspace=indent,eol,start
+    set showmatch
+    set ignorecase
+    set smartcase
+    set ruler
+    set hlsearch
+    set incsearch
+    set winaltkeys=no
+    set laststatus=2
+    set history=1000
+    set undolevels=1000
+    set wildignore=*.swp,*.bak,*.pyc,*.class
+    set title
+    set visualbell
+    set noerrorbells
+    set nobackup
+    set noswapfile
+    set modeline
+  " }
+  " Autocmd {
+    " Python
+    autocmd FileType python setlocal et sta sw=4 sts=4
+  " }
+  " Folding {
+    set foldenable
+    set foldmethod=syntax 
+    set foldlevel=1
+    set foldnestmax=3
+    set foldcolumn=3
+  " }
+  " Codecs {
+    set enc=utf-8
+    set fencs=utf-8,gbk
+    set fileencodings=utf-8,gbk,gb18030,utf-16,big5
+  "}
+  " Emacs Emulating {
 
-" Quickly edit/reload the vimrc file
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
+    " Simple navigation and editing key bindings from emacs, for Vim.  
+    " Inspired by a much more comprehensive plugin: Vimacs, by Andre Pang.
 
-filetype off
-set mouse=a
-set wrap
-set linebreak
-set nolist
-set wildmenu
-set foldmethod=manual 
-set helplang=cn
-set sw=2
-set sta 
-set tabstop=2
-set backspace=2
-syntax enable
-set number 
-filetype indent on
-filetype plugin on
-set completeopt=longest,menu
-set history=1000
-syntax on
-set autoindent
-set copyindent
-set smartindent
-set cin
-set smarttab
-set expandtab
-set backspace=indent,eol,start
-set showmatch
-set ignorecase
-set smartcase
-set ruler
-set hlsearch
-set incsearch
-set winaltkeys=no
-set laststatus=2
-set history=1000
-set undolevels=1000
-set wildignore=*.swp,*.bak,*.pyc,*.class
-set title
-set visualbell
-set noerrorbells
-set nobackup
-set noswapfile
+    function! s:home()
+      let start_col = col('.')
+      normal! ^
+      if col('.') == start_col
+        normal! 0
+      endif
+      return ''
+    endfunction
 
-" Codecs
-set enc=utf-8
-set fencs=utf-8,gbk
-set fileencodings=utf-8,gbk,gb18030,utf-16,big5
+    function! s:kill_line()
+      let [text_before_cursor, text_after_cursor] = s:split_line_text_at_cursor()
+      if len(text_after_cursor) == 0
+        normal! J
+      else
+        call setline(line('.'), text_before_cursor)
+      endif
+      return ''
+    endfunction
 
+    function! s:split_line_text_at_cursor()
+      let line_text = getline(line('.'))
+      let text_after_cursor  = line_text[col('.')-1 :]
+      let text_before_cursor = (col('.') > 1) ? line_text[: col('.')-2] : ''
+      return [text_before_cursor, text_after_cursor]
+    endfunction
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-" Simple navigation and editing key bindings from emacs, for Vim.  
-" Inspired by a much more comprehensive plugin: Vimacs, by Andre Pang.
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! s:home()
-  let start_col = col('.')
-  normal! ^
-  if col('.') == start_col
-    normal! 0
+    inoremap <silent> <Plug>emacs_home <C-o>:call <SID>home()<CR>
+    inoremap <silent> <Plug>emacs_kill_line <C-r>=<SID>kill_line()<CR>
+    inoremap <silent> <Plug>emacs_delete_word_forwards  <C-o>de
+    inoremap <silent> <Plug>emacs_delete_word_backwards <Space><Left><C-o>db<Del>
+
+    " on macvim, use option as meta key
+    if has("gui_macvim")
+      set macmeta
+    endif
+
+    " Insert mode
+    imap <C-b> <Left>
+    imap <C-f> <Right>
+    imap <C-a> <Plug>emacs_home
+    imap <C-e> <End>
+    imap <C-n> <Down>
+    imap <C-p> <Up>
+    imap <M-b> <C-o>b
+    imap <M-f> <C-o>e<Right>
+    imap <M-a> <C-o>{
+    imap <M-e> <C-o>}
+    imap <C-d> <Del>
+    imap <C-h> <BS>
+    imap <M-d> <Esc>dwi
+    imap <C-k> <Plug>emacs_kill_line
+    imap <C-x><C-s> <Esc>:w<Cr>a
+    imap <C-x><C-u> <Esc>ua
+    imap <C-x><C-f> <Esc>:e<Space>
+
+    " Command line mode
+    cmap <C-p> <Up>
+    cmap <C-n> <Down>
+    cmap <C-b> <Left> cmap <C-f> <Right>
+    cmap <C-a> <Home>
+    cmap <C-e> <End>
+    cmap <M-f> <S-Right>
+    cmap <M-b> <S-Left>
+    cmap <M-a> <Home>
+    cmap <M-e> <End>
+    cnoremap <C-d> <Del>
+    cnoremap <C-h> <BS>
+    cnoremap <M-h> <C-w>
+    cnoremap <M-d> <C-f>de<C-c>
+    cnoremap <C-k> <C-f>D<C-c><End>
+  " }
+" }
+" Bundles And Settings {
+
+  set rtp+=~/.vim/bundle/vundle/
+  call vundle#rc()
+  " Bundles {
+    Bundle 'gmarik/vundle'
+    Bundle 'Solarized'
+    Bundle 'Lokaltog/vim-powerline'
+    Bundle 'railscasts'
+    Bundle 'SuperTab-continued.'
+    Bundle 'Lokaltog/vim-easymotion'
+    Bundle "MarcWeber/vim-addon-mw-utils"
+    Bundle "tomtom/tlib_vim"
+    Bundle "honza/snipmate-snippets"
+    Bundle 'garbas/vim-snipmate'
+    Bundle 'kien/ctrlp.vim'
+    Bundle 'scrooloose/nerdtree'
+    Bundle 'c.vim'
+    Bundle 'a.vim'
+    Bundle 'majutsushi/tagbar'
+    Bundle 'Auto-Pairs'
+    Bundle 'The-NERD-Commenter'
+    Bundle 'quit-another-window'
+    Bundle 'AutoAlign'
+    Bundle 'Align'
+    Bundle 'pythoncomplete'
+    Bundle 'Markdown'
+    Bundle 'Markdown-syntax'
+    Bundle 'vimlatex'
+    Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
+    Bundle 'klen/python-mode'
+    Bundle 'mattn/zencoding-vim'
+    Bundle 'scrooloose/syntastic'
+    Bundle 'vim-ruby/vim-ruby'
+    Bundle 'tpope/vim-rails'
+    Bundle 'tpope/vim-bundler'
+    Bundle 'kchmck/vim-coffee-script'
+  " }
+  " Settings {
+    map <silent> <leader>l :TagbarToggle<cr>
+    filetype plugin indent on
+
+    " NerdTree Setting
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+    map <silent> <leader>n :NERDTreeToggle<cr>
+  " }
+" }
+" Appearence {
+
+  set go-=m "fix the black botterm border in xmonad 
+  set cursorline
+  set go-=T
+  if has("mac") || has("win32") || has("win64")
+    set guifont=Inconsolata-g:h12
+  elseif has("unix")
+    set guifont=SourceCodePro\ Semibold\ 11
   endif
-  return ''
-endfunction
+  set background=dark
+  colorscheme railscasts
+  let g:Powerline_symbols='fancy'
 
-function! s:kill_line()
-  let [text_before_cursor, text_after_cursor] = s:split_line_text_at_cursor()
-  if len(text_after_cursor) == 0
-    normal! J
-  else
-    call setline(line('.'), text_before_cursor)
-  endif
-  return ''
-endfunction
+"}
+" Key Mappings {
 
-function! s:split_line_text_at_cursor()
-  let line_text = getline(line('.'))
-  let text_after_cursor  = line_text[col('.')-1 :]
-  let text_before_cursor = (col('.') > 1) ? line_text[: col('.')-2] : ''
-  return [text_before_cursor, text_after_cursor]
-endfunction
+  " Remap command
+  nnoremap ; :
 
-inoremap <silent> <Plug>emacs_home <C-o>:call <SID>home()<CR>
-inoremap <silent> <Plug>emacs_kill_line <C-r>=<SID>kill_line()<CR>
-inoremap <silent> <Plug>emacs_delete_word_forwards  <C-o>de
-inoremap <silent> <Plug>emacs_delete_word_backwards <Space><Left><C-o>db<Del>
+  " Quickly edit/reload the vimrc file
+  nmap <silent> <leader>ev :e $MYVIMRC<CR>
+  nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
-" on macvim, use option as meta key
-if has("gui_macvim")
-  set macmeta
-endif
+  " Format paragraph
+  vmap Q gq
+  vmap Q gqap
 
-" Insert mode
-imap <C-b> <Left>
-imap <C-f> <Right>
-imap <C-a> <Plug>emacs_home
-imap <C-e> <End>
-imap <C-n> <Down>
-imap <C-p> <Up>
-imap <M-b> <C-o>b
-imap <M-f> <C-o>e<Right>
-imap <M-a> <C-o>{
-imap <M-e> <C-o>}
-imap <C-d> <Del>
-imap <C-h> <BS>
-imap <M-d> <Esc>dwi
-imap <C-k> <Plug>emacs_kill_line
+  " j,k on wrapped lines 
+  nnoremap j gj
+  nnoremap k gk
 
-imap <C-x><C-s> <Esc>:w<Cr>i
-imap <C-x><C-u> <Esc>ui
-imap <C-x><C-f> <Esc>:e<Space>
+  " Easy window navigation
+  map <C-h> <C-w>h
+  map <C-j> <C-w>j
+  map <C-k> <C-w>k
+  map <C-l> <C-w>l
 
-" Command line mode
-cmap <C-p> <Up>
-cmap <C-n> <Down>
-cmap <C-b> <Left> cmap <C-f> <Right>
-cmap <C-a> <Home>
-cmap <C-e> <End>
-cmap <M-f> <S-Right>
-cmap <M-b> <S-Left>
-cmap <M-a> <Home>
-cmap <M-e> <End>
-cnoremap <C-d> <Del>
-cnoremap <C-h> <BS>
-cnoremap <M-h> <C-w>
-cnoremap <M-d> <C-f>de<C-c>
-cnoremap <C-k> <C-f>D<C-c><End>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-"       Vundle - bundle manager for vim
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
-" custom bundle
-Bundle 'Solarized'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'railscasts'
-Bundle 'SuperTab-continued.'
-" Snipmate and depends
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "honza/snipmate-snippets"
-Bundle 'garbas/vim-snipmate'
-Bundle 'kien/ctrlp.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'c.vim'
-Bundle 'a.vim'
-Bundle 'taglist.vim'
-Bundle 'Auto-Pairs'
-" Bundle 'statusline.vim' " second choice of vim-powerline
-Bundle 'The-NERD-Commenter'
-Bundle 'quit-another-window'
-Bundle 'AutoAlign'
-Bundle 'Align'
-Bundle 'pythoncomplete'
-Bundle 'Markdown'
-Bundle 'Markdown-syntax'
-Bundle 'vimlatex'
-Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
-Bundle 'klen/python-mode'
-Bundle 'mattn/zencoding-vim'
-" Ruby
-Bundle 'vim-ruby/vim-ruby'
-" Rails
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-bundler'
-" Coffee Script
-Bundle 'kchmck/vim-coffee-script'
-filetype plugin indent on
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-"                       Taglist Setting
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let Tlist_Show_One_File=1
-let Tlist_Exit_OnlyWindow=1
-let Tlist_Use_Right_Window=1
-map <silent> <leader>l :TlistToggle<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 
-"                       Appearence
-"
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set go-=m "fix the black botterm border in xmonad 
-set cursorline
-set go-=T
-if has("mac")
-  set guifont=Inconsolata-g:h12
-elseif has("unix")
-  set guifont=SourceCodePro\ Semibold\ 11
-endif
-set background=dark
-colorscheme railscasts
-let g:Powerline_symbols='fancy'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-"                 Custom Keymappings
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remap command
-nnoremap ; :
-
-" Format paragraph
-vmap Q gq
-vmap Q gqap
-
-" j,k on wrapped lines 
-nnoremap j gj
-nnoremap k gk
-
-" Easy window navigation
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-
-" Quick jump to buffer list
-nnoremap <leader>b :buffers<CR>:buffer<Space>
-
-" NerdTree Setting
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-map <silent> <leader>n :NERDTreeToggle<cr>
-
-" Language specific settings
-
-" Python
-autocmd FileType python setlocal et sta sw=4 sts=4
+  " Quick jump to buffer list
+  nnoremap <leader>b :buffers<CR>:buffer<Space>
+" }

@@ -1,0 +1,8 @@
+[user]
+	name = freiz
+	email = freizsu@gmail.com
+[color]
+  ui =  true
+[alias]
+  st = status
+  stat = status
