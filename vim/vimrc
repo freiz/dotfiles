@@ -63,7 +63,6 @@
   " }
   " Codecs {
     set enc=utf-8
-    set fencs=utf-8,gbk
     set fileencodings=utf-8,gbk,gb18030,utf-16,big5
   "}
   " Emacs Emulating {
@@ -175,7 +174,6 @@
     Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
     Bundle 'klen/python-mode'
     Bundle 'mattn/zencoding-vim'
-    Bundle 'scrooloose/syntastic'
     Bundle 'vim-ruby/vim-ruby'
     Bundle 'tpope/vim-rails'
     Bundle 'tpope/vim-bundler'
