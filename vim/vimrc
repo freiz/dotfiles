@@ -168,8 +168,7 @@
     Bundle 'AutoAlign'
     Bundle 'Align'
     Bundle 'pythoncomplete'
-    Bundle 'Markdown'
-    Bundle 'Markdown-syntax'
+    Bundle 'vim-pandoc/vim-pandoc'
     Bundle 'vimlatex'
     Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
     Bundle 'klen/python-mode'
@@ -194,7 +193,7 @@
   set cursorline
   set go-=T
   if has("mac") || has("win32") || has("win64")
-    set guifont=Inconsolata-g:h12
+    set guifont=Source_Code_Pro_Semibold:h11
   elseif has("unix")
     set guifont=SourceCodePro\ Semibold\ 11
   endif
