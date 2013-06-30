@@ -6,3 +6,5 @@
 [alias]
   st = status
   stat = status
+[core]
+	editor = vim

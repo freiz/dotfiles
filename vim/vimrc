@@ -50,10 +50,7 @@
     set noswapfile
     set modeline
   " }
-  " Autocmd {
-    " Python
-    autocmd FileType python setlocal et sta sw=4 sts=4
-  " }
+
   " Folding {
     set foldenable
     set foldmethod=syntax 
@@ -155,8 +152,6 @@
     Bundle 'Lokaltog/vim-easymotion'
     Bundle "MarcWeber/vim-addon-mw-utils"
     Bundle "tomtom/tlib_vim"
-    Bundle "honza/snipmate-snippets"
-    Bundle 'garbas/vim-snipmate'
     Bundle 'kien/ctrlp.vim'
     Bundle 'scrooloose/nerdtree'
     Bundle 'c.vim'
@@ -193,7 +188,7 @@
   set cursorline
   set go-=T
   if has("mac") || has("win32") || has("win64")
-    set guifont=Source_Code_Pro_Semibold:h11
+    set guifont=Source_Code_Pro_Semibold:h12
   elseif has("unix")
     set guifont=SourceCodePro\ Semibold\ 11
   endif
@@ -227,4 +222,10 @@
 
   " Quick jump to buffer list
   nnoremap <leader>b :buffers<CR>:buffer<Space>
+" }
+
+" Autocmd {
+  " Python
+  autocmd FileType python setlocal et sta sw=4 sts=4
+  au BufNewFile,BufRead *.pandoc set filetype=pandoc
 " }
