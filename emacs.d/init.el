@@ -19,6 +19,7 @@
 	smex
 	yasnippet
 	color-theme-railscasts
+    color-theme-leuven
     smartparens
     autopair
     linum+
@@ -61,7 +62,7 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (setq inhibit-startup-screen t)
-(color-theme-railscasts)
+(color-theme-leuven)
 (set-default-font "Inconsolata-g-13")
 (require 'linum+)
 (global-linum-mode +1)
