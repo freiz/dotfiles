@@ -94,6 +94,8 @@
       '(
     "/usr/local/bin"
     "/usr/bin"
+    "C:\\Program Files\\nodejs"
+    "D:\\prog\\Git\\bin"
     ))
 
 ;;
