@@ -22,6 +22,7 @@
     set number 
     filetype indent on
     filetype plugin on
+    set fileformat=unix
     set completeopt=longest,menu
     set history=1000
     syntax on
@@ -148,6 +149,7 @@
     Bundle 'Solarized'
     Bundle 'Lokaltog/vim-powerline'
     Bundle 'railscasts'
+    Bundle 'Mustang2'
     Bundle 'SuperTab-continued.'
     Bundle 'Lokaltog/vim-easymotion'
     Bundle "MarcWeber/vim-addon-mw-utils"
@@ -172,6 +174,7 @@
     Bundle 'tpope/vim-rails'
     Bundle 'tpope/vim-bundler'
     Bundle 'kchmck/vim-coffee-script'
+    Bundle 'jelera/vim-javascript-syntax'
   " }
   " Settings {
     map <silent> <leader>l :TagbarToggle<cr>
@@ -188,12 +191,12 @@
   set cursorline
   set go-=T
   if has("mac") || has("win32") || has("win64")
-    set guifont=Source_Code_Pro_Semibold:h12
+    set guifont=Inconsolata-g:h12
   elseif has("unix")
-    set guifont=SourceCodePro\ Semibold\ 11
+    set guifont=Inconsolata-g\ Medium\ 11
   endif
   set background=dark
-  colorscheme railscasts
+  colorscheme mustang
   let g:Powerline_symbols='fancy'
 
 "}
@@ -223,9 +226,9 @@
   " Quick jump to buffer list
   nnoremap <leader>b :buffers<CR>:buffer<Space>
 " }
-
 " Autocmd {
   " Python
   autocmd FileType python setlocal et sta sw=4 sts=4
-  au BufNewFile,BufRead *.pandoc set filetype=pandoc
+  autocmd BufNewFile,BufRead *.pandoc set filetype=pandoc
+  autocmd FileType javascript call JavaScriptFold()
 " }
