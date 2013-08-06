@@ -150,12 +150,16 @@
     Bundle 'Lokaltog/vim-powerline'
     Bundle 'railscasts'
     Bundle 'Mustang2'
-    Bundle 'SuperTab-continued.'
     Bundle 'Lokaltog/vim-easymotion'
+    Bundle 'SuperTab-continued.'
     Bundle "MarcWeber/vim-addon-mw-utils"
     Bundle "tomtom/tlib_vim"
     Bundle 'kien/ctrlp.vim'
     Bundle 'scrooloose/nerdtree'
+    Bundle 'kien/rainbow_parentheses.vim'
+    Bundle 'vim-scripts/matchit.zip'
+    Bundle 'godlygeek/tabular'
+    Bundle 'terryma/vim-expand-region'
     Bundle 'c.vim'
     Bundle 'a.vim'
     Bundle 'majutsushi/tagbar'
@@ -169,7 +173,6 @@
     Bundle 'vimlatex'
     Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
     Bundle 'klen/python-mode'
-    Bundle 'mattn/zencoding-vim'
     Bundle 'vim-ruby/vim-ruby'
     Bundle 'tpope/vim-rails'
     Bundle 'tpope/vim-bundler'
@@ -191,7 +194,7 @@
   set cursorline
   set go-=T
   if has("mac") || has("win32") || has("win64")
-    set guifont=Inconsolata-g:h12
+    set guifont=Inconsolata-g:h13
   elseif has("unix")
     set guifont=Inconsolata-g\ Medium\ 11
   endif
