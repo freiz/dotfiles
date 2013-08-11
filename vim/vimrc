@@ -51,7 +51,6 @@
     set noswapfile
     set modeline
   " }
-
   " Folding {
     set foldenable
     set foldmethod=syntax 
@@ -166,8 +165,6 @@
     Bundle 'Auto-Pairs'
     Bundle 'The-NERD-Commenter'
     Bundle 'quit-another-window'
-    Bundle 'AutoAlign'
-    Bundle 'Align'
     Bundle 'pythoncomplete'
     Bundle 'vim-pandoc/vim-pandoc'
     Bundle 'vimlatex'
