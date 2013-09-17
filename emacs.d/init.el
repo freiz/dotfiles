@@ -1,4 +1,20 @@
 ;;
+;; Init functions
+;;
+
+(defconst user-init-dir
+  (cond ((boundp 'user-emacs-directory)
+         user-emacs-directory)
+        ((boundp 'user-init-directory)
+         user-init-directory)
+        (t "~/.emacs.d/")))
+
+(defun load-user-file (file)
+  (interactive "f")
+  "Load a file in current user's configuration directory"
+  (load-file (expand-file-name file user-init-dir)))
+
+;;
 ;; Install & Configure el-get
 ;;
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
@@ -14,21 +30,23 @@
 ;; el-get packages
 (setq my-el-get-packages
       `(
-	el-get
-	auto-complete
-	smex
-	yasnippet
-	color-theme-railscasts
-    color-theme-leuven
-    smartparens
-    autopair
-    linum+
-    js-comint
-    js2-mode
-    jshint-mode
-    pandoc-mode
-    markdown-mode
-	))
+        el-get
+        auto-complete
+        smex
+        yasnippet
+        color-theme-railscasts
+        color-theme-leuven
+        smartparens
+        autopair
+        linum+
+        js-comint
+        js2-mode
+        jshint-mode
+        pandoc-mode
+        Markdown-mode
+        coffee-mode
+        flymake-coffee
+        ))
 (el-get `sync my-el-get-packages)
 
 ;;
@@ -63,7 +81,8 @@
 (scroll-bar-mode -1)
 (setq inhibit-startup-screen t)
 (color-theme-leuven)
-(set-default-font "Inconsolata-g-13")
+(color-theme-railscasts)
+(set-default-font "Hermit-12")
 (require 'linum+)
 (global-linum-mode +1)
 ;; Parentheses
@@ -79,7 +98,7 @@
 ;; Do not use tab
 (setq c-basic-offset 2)
 (setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
+(setq-default tab-width 2)
 ;; Can delete selection
 (delete-selection-mode t)
 ;; WindMove
@@ -88,16 +107,7 @@
 ;; Disable backups
 (setq make-backup-files nil)
 ;; Highlight current line
-(global-hl-line-mode +1)
-;; PATH Settings
-(setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))
-(setq exec-path
-      '(
-    "/usr/local/bin"
-    "/usr/bin"
-    "C:\\Program Files\\nodejs"
-    "D:\\prog\\Git\\bin"
-    ))
+;; (global-hl-line-mode +1)
 
 ;;
 ;; Programming Language
@@ -110,12 +120,22 @@
 (add-hook 'javascript-mode-hook
           (lambda () (flymake-mode t)))
 (add-hook 'find-file-hook 'flymake-find-file-hook)
+(setq inferior-js-program-command "node --interactive")
 
 ;; Markdown
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.pandoc\\'" . markdown-mode))
 
 ;; Pandoc
 (add-hook 'markdown-mode-hook 'turn-on-pandoc)
 (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings)
+
+;; CoffeeScript
+(setq coffee-tab-width 2)
+
+;;
+;; Load modules
+;;
+(load-user-file "personal.el")
