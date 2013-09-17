@@ -43,7 +43,7 @@
         js2-mode
         jshint-mode
         pandoc-mode
-        Markdown-mode
+        markdown-mode
         coffee-mode
         flymake-coffee
         ))
