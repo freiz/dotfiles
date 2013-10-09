@@ -46,6 +46,7 @@
         markdown-mode
         coffee-mode
         flymake-coffee
+        sml-mode
         ))
 (el-get `sync my-el-get-packages)
 
