@@ -36,6 +36,7 @@
         yasnippet
         color-theme-railscasts
         color-theme-leuven
+        color-theme-desert
         smartparens
         autopair
         linum+
@@ -46,6 +47,7 @@
         markdown-mode
         coffee-mode
         flymake-coffee
+        PowerShell-Mode
         ))
 (el-get `sync my-el-get-packages)
 
@@ -80,8 +82,7 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (setq inhibit-startup-screen t)
-(color-theme-leuven)
-(color-theme-railscasts)
+(color-theme-desert)
 (set-default-font "Hermit-12")
 (require 'linum+)
 (global-linum-mode +1)
@@ -139,3 +140,8 @@
 ;; Load modules
 ;;
 (load-user-file "personal.el")
+
+;;
+;; Start Server
+;;
+(server-start)

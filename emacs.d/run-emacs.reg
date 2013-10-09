@@ -1,0 +1,19 @@
+Windows Registry Editor Version 5.00
+
+;
+; Add a 'Edit with Emacs' Menu in right click
+; 
+; It will first attemp use emacs client, if there are no server, emacs will open
+;
+; [Note] Replace the path if it is wrong
+;
+
+[HKEY_CLASSES_ROOT\*\shell]
+[HKEY_CLASSES_ROOT\*\shell\openwemacs]
+@="&Edit with Emacs"
+[HKEY_CLASSES_ROOT\*\shell\openwemacs\command]
+@="D:\\Apps\\emacs\\bin\\emacsclientw.exe --alternate-editor=\"D:\\Apps\\emacs\\bin\\runemacs.exe\" -n \"%1\""
+[HKEY_CLASSES_ROOT\Directory\shell\openwemacs]
+@="Edit &with Emacs"
+[HKEY_CLASSES_ROOT\Directory\shell\openwemacs\command]
+@="D:\\Apps\emacs\\bin\\emacsclientw.exe --alternate-editor=\"D:\\Apps\emacs\\bin\\runemacs.exe\" -n \"%1\""
