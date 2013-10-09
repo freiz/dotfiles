@@ -196,7 +196,7 @@
     set guifont=Inconsolata-g\ Medium\ 11
   endif
   set background=dark
-  colorscheme mustang
+  colorscheme desert
   let g:Powerline_symbols='fancy'
 
 "}
