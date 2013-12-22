@@ -49,6 +49,7 @@
         flymake-coffee
         sml-mode
         PowerShell-Mode
+        undo-tree
         ))
 (el-get `sync my-el-get-packages)
 
@@ -145,4 +146,5 @@
 ;;
 ;; Start Server
 ;;
-(server-start)
+(load "server")
+(unless (server-running-p) (server-start))

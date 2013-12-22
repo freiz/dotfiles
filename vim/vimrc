@@ -50,6 +50,7 @@
     set nobackup
     set noswapfile
     set modeline
+    set nrformats-=octal
   " }
   " Folding {
     set foldenable
