@@ -33,13 +33,12 @@
         el-get
         auto-complete
         smex
-        yasnippet
         color-theme-railscasts
         color-theme-leuven
         color-theme-desert
         smartparens
         autopair
-        linum+
+        linum-ex
         js-comint
         js2-mode
         jshint-mode
@@ -47,9 +46,9 @@
         markdown-mode
         coffee-mode
         flymake-coffee
-        sml-mode
-        PowerShell-Mode
-        undo-tree
+        quack
+        scheme-complete
+        highlight-parentheses
         ))
 (el-get `sync my-el-get-packages)
 
@@ -60,18 +59,27 @@
 ;; Auto Complete
 (require 'auto-complete-config)
 (ac-config-default)
-;; Yasnippet
-(yas-global-mode)
-(yas-minor-mode-on)
 ;; Ido
 (require 'ido)
 (ido-mode t)
-(setq ido-enable-flex-matching t) ;; enable fuzzy matching
+(setq ido-enable-flex-matching t)
 ;; Smex
 (require 'smex)
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex-major-mode-commands)
 (global-set-key (kbd "M-x") 'smex)
+;; Highlight Parentheses
+(define-globalized-minor-mode global-highlight-parentheses-mode
+  highlight-parentheses-mode
+  (lambda ()
+    (highlight-parentheses-mode t)))
+(global-highlight-parentheses-mode t)
+
+(setq hl-paren-colors
+      '(;"#8f8f8f" ; this comes from Zenburn
+                   ; and I guess I'll try to make the far-outer parens look like this
+        "orange1" "yellow1" "greenyellow" "green1"
+        "springgreen1" "cyan1" "slateblue1" "magenta1" "purple"))
 ;; Autopair
 (require 'autopair)
 (autopair-global-mode)
@@ -86,7 +94,7 @@
 (setq inhibit-startup-screen t)
 (color-theme-desert)
 (set-default-font "Hermit-12")
-(require 'linum+)
+(require 'linum-ex)
 (global-linum-mode +1)
 ;; Parentheses
 (require 'paren)
@@ -138,6 +146,9 @@
 ;; CoffeeScript
 (setq coffee-tab-width 2)
 
+;; Scheme
+(require 'quack)
+
 ;;
 ;; Load modules
 ;;
@@ -148,3 +159,4 @@
 ;;
 (load "server")
 (unless (server-running-p) (server-start))
+
