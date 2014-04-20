@@ -1,73 +1,93 @@
 " Modeline and Notes {
 " vim: set foldmethod=marker foldmarker={,} foldlevel=0:
 " }
+
 " Environment {
   " Basic {
+
     set nocompatible
-    let mapleader=","
-    set hidden
-    filetype off
-    set mouse=a
-    set wrap
-    set linebreak
-    set nolist
-    set wildmenu
-    set helplang=cn
-    set sw=2
-    set aw
-    set sta 
-    set tabstop=2
-    set backspace=2
-    syntax enable
     set number 
-    filetype indent on
-    filetype plugin on
-    set fileformat=unix
-    set completeopt=longest,menu
-    set history=1000
-    syntax on
-    set autoindent
-    set copyindent
-    set smartindent
-    set cin
-    set smarttab
-    set expandtab
-    set backspace=indent,eol,start
+    set hidden
+    set wildmenu
+    set autowrite
     set showmatch
     set ignorecase
     set smartcase
     set ruler
     set hlsearch
     set incsearch
-    set winaltkeys=no
-    set laststatus=2
-    set history=1000
-    set undolevels=1000
-    set wildignore=*.swp,*.bak,*.pyc,*.class
     set title
     set visualbell
     set noerrorbells
     set nobackup
     set noswapfile
     set modeline
+    filetype off
+    syntax enable
+    filetype indent on
+    filetype plugin on
+    syntax on
+    let mapleader=","
+    set mouse=a
     set nrformats-=octal
+    set winaltkeys=no
+    set laststatus=2
+    set history=1000
+    set undolevels=1000
+    set wildignore=*.swp,*.bak,*.pyc,*.class
+    set fileformat=unix
+    set completeopt=longest,menu
+    set backspace=indent,eol,start
   " }
+  
+  " Tab & Indent {
+
+    set autoindent
+    set copyindent
+    set smartindent
+    set cindent
+    set smarttab
+    set expandtab
+    set tabstop=2
+    set shiftwidth=2
+  " }
+
   " Folding {
+
     set foldenable
     set foldmethod=syntax 
     set foldlevel=1
     set foldnestmax=3
     set foldcolumn=3
   " }
+
   " Codecs {
-    set enc=utf-8
-    set fileencodings=utf-8,gbk,gb18030,utf-16,big5
+
+    set encoding=utf-8
+    set fileencodings=utf-8,ucs-bom,gbk,gb18030,utf-16,big5
     if has("win32")
       language messages zh_CN.utf-8
     endif
   "}
-  " Emacs Emulating {
 
+  " Appearence {
+
+    set go-=m
+    set go-=T
+    set cursorline
+    set wrap
+    set linebreak
+    set nolist
+    if has("mac") || has("win32") || has("win64")
+      set guifont=Inconsolata-g:h14
+    elseif has("unix")
+      set guifont=Inconsolata-g\ Medium\ 12
+    endif
+    set background=dark
+    colorscheme desert
+  "}
+
+  " Emacs Emulating {
     " Simple navigation and editing key bindings from emacs, for Vim.  
     " Inspired by a much more comprehensive plugin: Vimacs, by Andre Pang.
 
@@ -143,6 +163,7 @@
     cnoremap <C-k> <C-f>D<C-c><End>
   " }
 " }
+
 " Bundles And Settings {
 
   set rtp+=~/.vim/bundle/vundle/
@@ -155,13 +176,12 @@
     Bundle 'Mustang2'
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'SuperTab-continued.'
-    Bundle "MarcWeber/vim-addon-mw-utils"
-    Bundle "tomtom/tlib_vim"
+    Bundle 'MarcWeber/vim-addon-mw-utils'
+    Bundle 'tomtom/tlib_vim'
     Bundle 'kien/ctrlp.vim'
     Bundle 'scrooloose/nerdtree'
     Bundle 'kien/rainbow_parentheses.vim'
     Bundle 'vim-scripts/matchit.zip'
-    Bundle 'godlygeek/tabular'
     Bundle 'terryma/vim-expand-region'
     Bundle 'c.vim'
     Bundle 'a.vim'
@@ -169,20 +189,16 @@
     Bundle 'Auto-Pairs'
     Bundle 'The-NERD-Commenter'
     Bundle 'quit-another-window'
-    Bundle 'pythoncomplete'
     Bundle 'vim-pandoc/vim-pandoc'
-    Bundle 'vimlatex'
-    Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
     Bundle 'klen/python-mode'
-    Bundle 'vim-ruby/vim-ruby'
-    Bundle 'tpope/vim-rails'
-    Bundle 'tpope/vim-bundler'
-    Bundle 'kchmck/vim-coffee-script'
-    Bundle 'jelera/vim-javascript-syntax'
   " }
-  " Settings {
-    map <silent> <leader>l :TagbarToggle<cr>
+
+  " Bundles Setting {
+
     filetype plugin indent on
+
+    " Toggle TagBar
+    map <silent> <leader>l :TagbarToggle<cr>
 
     " NerdTree Setting
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -211,27 +227,16 @@
     let g:rbpt_max = 16
     let g:rbpt_loadcmd_toggle = 0
 
-    au VimEnter * RainbowParenthesesToggle
-    au Syntax * RainbowParenthesesLoadRound
-    au Syntax * RainbowParenthesesLoadSquare
-    au Syntax * RainbowParenthesesLoadBraces
+    autocmd VimEnter * RainbowParenthesesToggle
+    autocmd Syntax * RainbowParenthesesLoadRound
+    autocmd Syntax * RainbowParenthesesLoadSquare
+    autocmd Syntax * RainbowParenthesesLoadBraces
+
+    " Vim Powerline
+    let g:Powerline_symbols='fancy'
   " }
 " }
-" Appearence {
 
-  set go-=m "fix the black botterm border in xmonad 
-  set cursorline
-  set go-=T
-  if has("mac") || has("win32") || has("win64")
-    set guifont=Inconsolata-g:h13
-  elseif has("unix")
-    set guifont=Inconsolata-g\ Medium\ 11
-  endif
-  set background=dark
-  colorscheme desert
-  let g:Powerline_symbols='fancy'
-
-"}
 " Key Mappings {
 
   " Remap command
@@ -258,9 +263,9 @@
   " Quick jump to buffer list
   nnoremap <leader>b :buffers<CR>:buffer<Space>
 " }
+
 " Autocmd {
-  " Python
+
   autocmd FileType python setlocal et sta sw=4 sts=4
   autocmd BufNewFile,BufRead *.pandoc set filetype=pandoc
-  autocmd FileType javascript call JavaScriptFold()
 " }

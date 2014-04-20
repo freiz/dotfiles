@@ -1,6 +1,4 @@
 [user]
-	name = freiz
-	email = freizsu@gmail.com
 [color]
   ui =  true
 [alias]
@@ -8,3 +6,5 @@
   stat = status
 [core]
 	editor = vim
+[credential]
+	helper = store
