@@ -8,3 +8,6 @@
 	editor = vim
 [credential]
 	helper = store
+[user]
+	name = freiz
+	email = freizsu@gmail.com
