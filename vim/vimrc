@@ -191,6 +191,7 @@
     Bundle 'quit-another-window'
     Bundle 'vim-pandoc/vim-pandoc'
     Bundle 'klen/python-mode'
+    Bundle 'fatih/vim-go'
   " }
 
   " Bundles Setting {
@@ -234,6 +235,21 @@
 
     " Vim Powerline
     let g:Powerline_symbols='fancy'
+
+    " Go Programming Settings
+    autocmd BufRead,BufNewFile *.go set filetype=go
+    autocmd FileType go nmap <leader>i <Plug>(go-import)
+    autocmd FileType go nmap <leader>gd <Plug>(go-def)
+    autocmd FileType go nmap <leader>gv <Plug>(go-doc-vertical)
+    autocmd FileType go nmap <leader>r <Plug>(go-run)
+    autocmd FileType go nmap <leader>b <Plug>(go-build)
+    autocmd FileType go nmap <leader>t <Plug>(go-test)
+    
+    let g:go_play_open_browser = 0
+    let g:go_fmt_fail_silently = 1
+    let g:go_fmt_command = "gofmt"
+
+
   " }
 " }
 
