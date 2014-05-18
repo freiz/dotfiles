@@ -65,9 +65,6 @@
 
     set encoding=utf-8
     set fileencodings=utf-8,ucs-bom,gbk,gb18030,utf-16,big5
-    if has("win32")
-      language messages zh_CN.utf-8
-    endif
   "}
 
   " Appearence {
@@ -171,11 +168,12 @@
   " Bundles {
     Bundle 'gmarik/vundle'
     Bundle 'Solarized'
-    Bundle 'Lokaltog/vim-powerline'
+    Bundle 'bling/vim-airline'
     Bundle 'railscasts'
     Bundle 'Mustang2'
     Bundle 'Lokaltog/vim-easymotion'
-    Bundle 'SuperTab-continued.'
+    Bundle 'Shougo/neocomplcache.vim'
+    Bundle 'godlygeek/tabular'
     Bundle 'MarcWeber/vim-addon-mw-utils'
     Bundle 'tomtom/tlib_vim'
     Bundle 'kien/ctrlp.vim'
@@ -183,7 +181,7 @@
     Bundle 'kien/rainbow_parentheses.vim'
     Bundle 'vim-scripts/matchit.zip'
     Bundle 'terryma/vim-expand-region'
-    Bundle 'c.vim'
+    Bundle 'blak3mill3r/c.vim'
     Bundle 'a.vim'
     Bundle 'majutsushi/tagbar'
     Bundle 'Auto-Pairs'
@@ -191,12 +189,21 @@
     Bundle 'quit-another-window'
     Bundle 'vim-pandoc/vim-pandoc'
     Bundle 'klen/python-mode'
-    Bundle 'fatih/vim-go'
   " }
 
   " Bundles Setting {
 
     filetype plugin indent on
+
+    " Neocomplcache 
+    let g:acp_enableAtStartup = 0
+    " Use neocomplcache.
+    let g:neocomplcache_enable_at_startup = 1
+    " Use smartcase.
+    let g:neocomplcache_enable_smart_case = 1
+    " Set minimum syntax keyword length.
+    let g:neocomplcache_min_syntax_length = 3
+    let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
     " Toggle TagBar
     map <silent> <leader>l :TagbarToggle<cr>
@@ -265,6 +272,22 @@
   " Format paragraph
   vmap Q gq
   vmap Q gqap
+
+  " Tabularize
+  nmap <Leader>a& :Tabularize /&<CR>
+  vmap <Leader>a& :Tabularize /&<CR>
+  nmap <Leader>a= :Tabularize /=<CR>
+  vmap <Leader>a= :Tabularize /=<CR>
+  nmap <Leader>a: :Tabularize /:<CR>
+  vmap <Leader>a: :Tabularize /:<CR>
+  nmap <Leader>a:: :Tabularize /:\zs<CR>
+  vmap <Leader>a:: :Tabularize /:\zs<CR>
+  nmap <Leader>a, :Tabularize /,<CR>
+  vmap <Leader>a, :Tabularize /,<CR>
+  nmap <Leader>a,, :Tabularize /,\zs<CR>
+  vmap <Leader>a,, :Tabularize /,\zs<CR>
+  nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+  vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 
   " j,k on wrapped lines 
   nnoremap j gj
