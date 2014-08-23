@@ -67,23 +67,6 @@
     set fileencodings=utf-8,ucs-bom,gbk,gb18030,utf-16,big5
   "}
 
-  " Appearence {
-
-    set go-=m
-    set go-=T
-    set cursorline
-    set wrap
-    set linebreak
-    set nolist
-    if has("mac") || has("win32") || has("win64")
-      set guifont=Inconsolata-g:h14
-    elseif has("unix")
-      set guifont=Inconsolata-g\ Medium\ 12
-    endif
-    set background=dark
-    colorscheme railscasts
-  "}
-
   " Emacs Emulating {
     " Simple navigation and editing key bindings from emacs, for Vim.  
     " Inspired by a much more comprehensive plugin: Vimacs, by Andre Pang.
@@ -242,6 +225,24 @@
 
   " }
 " }
+
+" Appearence {
+
+  set go-=m
+  set go-=T
+  set cursorline
+  set wrap
+  set linebreak
+  set nolist
+  if has("mac") || has("win32") || has("win64")
+    set guifont=Inconsolata-g:h14
+  elseif has("unix")
+    set guifont=Inconsolata-g\ Medium\ 12
+  endif
+  set background=dark
+  colorscheme railscasts
+"}
+
 
 " Key Mappings {
 
