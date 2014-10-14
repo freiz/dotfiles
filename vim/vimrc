@@ -67,23 +67,6 @@
     set fileencodings=utf-8,ucs-bom,gbk,gb18030,utf-16,big5
   "}
 
-  " Appearence {
-
-    set go-=m
-    set go-=T
-    set cursorline
-    set wrap
-    set linebreak
-    set nolist
-    if has("mac") || has("win32") || has("win64")
-      set guifont=Inconsolata-g:h14
-    elseif has("unix")
-      set guifont=Inconsolata-g\ Medium\ 12
-    endif
-    set background=dark
-    colorscheme desert
-  "}
-
   " Emacs Emulating {
     " Simple navigation and editing key bindings from emacs, for Vim.  
     " Inspired by a much more comprehensive plugin: Vimacs, by Andre Pang.
@@ -167,10 +150,8 @@
   call vundle#rc()
   " Bundles {
     Bundle 'gmarik/vundle'
-    Bundle 'Solarized'
     Bundle 'bling/vim-airline'
     Bundle 'railscasts'
-    Bundle 'Mustang2'
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'Shougo/neocomplcache.vim'
     Bundle 'godlygeek/tabular'
@@ -187,7 +168,6 @@
     Bundle 'Auto-Pairs'
     Bundle 'The-NERD-Commenter'
     Bundle 'quit-another-window'
-    Bundle 'vim-pandoc/vim-pandoc'
     Bundle 'klen/python-mode'
   " }
 
@@ -243,22 +223,26 @@
     " Vim Powerline
     let g:Powerline_symbols='fancy'
 
-    " Go Programming Settings
-    autocmd BufRead,BufNewFile *.go set filetype=go
-    autocmd FileType go nmap <leader>i <Plug>(go-import)
-    autocmd FileType go nmap <leader>gd <Plug>(go-def)
-    autocmd FileType go nmap <leader>gv <Plug>(go-doc-vertical)
-    autocmd FileType go nmap <leader>r <Plug>(go-run)
-    autocmd FileType go nmap <leader>b <Plug>(go-build)
-    autocmd FileType go nmap <leader>t <Plug>(go-test)
-    
-    let g:go_play_open_browser = 0
-    let g:go_fmt_fail_silently = 1
-    let g:go_fmt_command = "gofmt"
-
-
   " }
 " }
+
+" Appearence {
+
+  set go-=m
+  set go-=T
+  set cursorline
+  set wrap
+  set linebreak
+  set nolist
+  if has("mac") || has("win32") || has("win64")
+    set guifont=Inconsolata-g:h14
+  elseif has("unix")
+    set guifont=Inconsolata-g\ Medium\ 12
+  endif
+  set background=dark
+  colorscheme railscasts
+"}
+
 
 " Key Mappings {
 
@@ -306,5 +290,4 @@
 " Autocmd {
 
   autocmd FileType python setlocal et sta sw=4 sts=4
-  autocmd BufNewFile,BufRead *.pandoc set filetype=pandoc
 " }
