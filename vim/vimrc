@@ -65,6 +65,9 @@
 
     set encoding=utf-8
     set fileencodings=utf-8,ucs-bom,gbk,gb18030,utf-16,big5
+    source $VIMRUNTIME/delmenu.vim
+    source $VIMRUNTIME/menu.vim
+    language message zh_CN.utf-8
   "}
 
   " Emacs Emulating {
@@ -235,12 +238,12 @@
   set linebreak
   set nolist
   if has("mac") || has("win32") || has("win64")
-    set guifont=Inconsolata-g:h14
+    set guifont=Consolas:h14
   elseif has("unix")
     set guifont=Inconsolata-g\ Medium\ 12
   endif
   set background=dark
-  colorscheme railscasts
+  colorscheme desert
 "}
 
 " Key Mappings {
