@@ -172,6 +172,8 @@
     Bundle 'The-NERD-Commenter'
     Bundle 'quit-another-window'
     Bundle 'klen/python-mode'
+    Bundle 'vim-pandoc/vim-pandoc'
+    Bundle 'vim-pandoc/vim-pandoc-syntax'
   " }
 
   " Bundles Setting {
