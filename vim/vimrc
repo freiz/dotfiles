@@ -67,7 +67,6 @@
     set fileencodings=utf-8,ucs-bom,gbk,gb18030,utf-16,big5
     source $VIMRUNTIME/delmenu.vim
     source $VIMRUNTIME/menu.vim
-    language message zh_CN.utf-8
   "}
 
   " Emacs Emulating {
@@ -174,6 +173,7 @@
     Bundle 'klen/python-mode'
     Bundle 'vim-pandoc/vim-pandoc'
     Bundle 'vim-pandoc/vim-pandoc-syntax'
+    Bundle 'raichoo/haskell-vim'
   " }
 
   " Bundles Setting {
@@ -240,9 +240,9 @@
   set linebreak
   set nolist
   if has("mac") || has("win32") || has("win64")
-    set guifont=Consolas:h14
+    set guifont=M+\ 1m:h12
   elseif has("unix")
-    set guifont=Inconsolata-g\ Medium\ 12
+    set guifont=M+\ 1m\ 12
   endif
   set background=dark
   colorscheme desert
