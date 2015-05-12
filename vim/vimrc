@@ -241,8 +241,10 @@
   set nolist
   if has("mac") || has("win32") || has("win64")
     set guifont=M+\ 1m:h12
+    set guifontwide=YouYuan:h12
   elseif has("unix")
     set guifont=M+\ 1m\ 12
+    set guifontwide=YouYuan\ 12
   endif
   set background=dark
   colorscheme desert
