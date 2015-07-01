@@ -2,3 +2,6 @@
 	path = vim/bundle/vundle
 	url = https://github.com/gmarik/vundle.git
   ignore = dirty
+[submodule "fonts"]
+	path = fonts
+	url = https://github.com/chrissimpkins/codeface
