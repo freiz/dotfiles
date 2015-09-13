@@ -65,6 +65,7 @@
 
     set encoding=utf-8
     set fileencodings=utf-8,ucs-bom,gbk,gb18030,utf-16,big5
+
     source $VIMRUNTIME/delmenu.vim
     source $VIMRUNTIME/menu.vim
   "}
@@ -161,10 +162,11 @@
     Bundle 'tomtom/tlib_vim'
     Bundle 'kien/ctrlp.vim'
     Bundle 'scrooloose/nerdtree'
+    Bundle 'scrooloose/syntastic'
     Bundle 'kien/rainbow_parentheses.vim'
     Bundle 'vim-scripts/matchit.zip'
     Bundle 'terryma/vim-expand-region'
-    Bundle 'blak3mill3r/c.vim'
+    Bundle 'freiz/c.vim'
     Bundle 'a.vim'
     Bundle 'majutsushi/tagbar'
     Bundle 'Auto-Pairs'
@@ -174,6 +176,7 @@
     Bundle 'vim-pandoc/vim-pandoc'
     Bundle 'vim-pandoc/vim-pandoc-syntax'
     Bundle 'raichoo/haskell-vim'
+    Bundle 'zah/nim.vim'
   " }
 
   " Bundles Setting {
@@ -240,11 +243,11 @@
   set linebreak
   set nolist
   if has("mac") || has("win32") || has("win64")
-    set guifont=M+\ 1m:h12
-    set guifontwide=YouYuan:h12
+    set guifont=Fantasque\ Sans\ Mono:h13
+    set guifontwide=YouYuan:h13
   elseif has("unix")
-    set guifont=M+\ 1m\ 12
-    set guifontwide=YouYuan\ 12
+    set guifont=FantasqueSansMono\ 13
+    set guifontwide=YouYuan\ 13
   endif
   set background=dark
   colorscheme desert
@@ -296,4 +299,5 @@
 " Autocmd {
 
   autocmd FileType python setlocal et sta sw=4 sts=4
+  autocmd BufRead,BufNewFile *.nim set filetype=nim
 " }
