@@ -176,7 +176,7 @@
     Bundle 'vim-pandoc/vim-pandoc'
     Bundle 'vim-pandoc/vim-pandoc-syntax'
     Bundle 'raichoo/haskell-vim'
-    Bundle 'zah/nim.vim'
+    Bundle 'freiz/nim.vim'
   " }
 
   " Bundles Setting {
@@ -242,15 +242,15 @@
   set wrap
   set linebreak
   set nolist
-  if has("mac") || has("win32") || has("win64")
+  if has("mac")
     set guifont=Fantasque\ Sans\ Mono:h13
-    set guifontwide=YouYuan:h13
+  elseif has("win32") || has("win64")
+    set guifont=Fantasque\ Sans\ Mono:h13
   elseif has("unix")
     set guifont=FantasqueSansMono\ 13
-    set guifontwide=YouYuan\ 13
   endif
   set background=dark
-  colorscheme desert
+  colorscheme railscasts
 "}
 
 " Key Mappings {
