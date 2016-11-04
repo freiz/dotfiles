@@ -149,10 +149,10 @@
 
 " Plugins And Settings {
 
-  set rtp+=~/.vim/bundle/vundle/
+  set rtp+=~/.vim/bundle/Vundle.vim/
   call vundle#begin()
   " Plugins {
-    Plugin 'gmarik/vundle'
+    Plugin 'VundleVim/Vundle.vim'
     Plugin 'bling/vim-airline'
     Plugin 'railscasts'
     Plugin 'Lokaltog/vim-easymotion'
@@ -178,10 +178,10 @@
     Plugin 'raichoo/haskell-vim'
     Plugin 'rust-lang/rust.vim'
   " }
+  call vundle#end()
+  filetype plugin indent on
 
   " Bundles Setting {
-
-    filetype plugin indent on
 
     " Neocomplcache 
     let g:acp_enableAtStartup = 0
@@ -250,7 +250,7 @@
     set guifont=FantasqueSansMono\ 13
   endif
   set background=dark
-  colorscheme railscasts
+  colorscheme desert
 "}
 
 " Key Mappings {
@@ -299,5 +299,5 @@
 " Autocmd {
 
   autocmd FileType python setlocal et sta sw=4 sts=4
-  autocmd BufRead,BufNewFile *.nim set filetype=nim
+  autocmd BufRead,BufNewFile *.rs set filetype=rust
 " }
