@@ -176,7 +176,8 @@
     Plugin 'vim-pandoc/vim-pandoc'
     Plugin 'vim-pandoc/vim-pandoc-syntax'
     Plugin 'raichoo/haskell-vim'
-    Plugin 'rust-lang/rust.vim'
+    Plugin 'zah/nim.vim'
+    Plugin 'thinca/vim-quickrun'
   " }
   call vundle#end()
   filetype plugin indent on
