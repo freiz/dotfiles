@@ -154,6 +154,7 @@
   " Plugins {
     Plugin 'VundleVim/Vundle.vim'
     Plugin 'bling/vim-airline'
+    Plugin 'altercation/vim-colors-solarized'
     Plugin 'railscasts'
     Plugin 'Lokaltog/vim-easymotion'
     Plugin 'Shougo/neocomplcache.vim'
@@ -178,6 +179,7 @@
     Plugin 'raichoo/haskell-vim'
     Plugin 'zah/nim.vim'
     Plugin 'thinca/vim-quickrun'
+    Plugin 'tpope/vim-fugitive'
   " }
   call vundle#end()
   filetype plugin indent on
@@ -250,8 +252,8 @@
   elseif has("unix")
     set guifont=FantasqueSansMono\ 13
   endif
-  set background=dark
-  colorscheme desert
+  set background=light
+  colorscheme solarized
 "}
 
 " Key Mappings {
