@@ -180,6 +180,7 @@
     Plugin 'zah/nim.vim'
     Plugin 'thinca/vim-quickrun'
     Plugin 'tpope/vim-fugitive'
+    Plugin 'mileszs/ack.vim'
   " }
   call vundle#end()
   filetype plugin indent on
@@ -250,9 +251,9 @@
   elseif has("win32") || has("win64")
     set guifont=Fantasque\ Sans\ Mono:h13
   elseif has("unix")
-    set guifont=FantasqueSansMono\ 13
+    set guifont=DroidSansMono\ 13
   endif
-  set background=light
+  set background=dark
   colorscheme solarized
 "}
 
