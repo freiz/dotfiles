@@ -177,6 +177,8 @@
     Plugin 'vim-pandoc/vim-pandoc-syntax'
     Plugin 'raichoo/haskell-vim'
     Plugin 'rust-lang/rust.vim'
+    Plugin 'zah/nim.vim'
+    Plugin 'thinca/vim-quickrun'
   " }
   call vundle#end()
   filetype plugin indent on
@@ -300,4 +302,5 @@
 
   autocmd FileType python setlocal et sta sw=4 sts=4
   autocmd BufRead,BufNewFile *.rs set filetype=rust
+  autocmd BufRead,BufNewFile *.nim set filetype=nim
 " }
