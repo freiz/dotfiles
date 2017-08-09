@@ -181,6 +181,7 @@
     Plugin 'thinca/vim-quickrun'
     Plugin 'tpope/vim-fugitive'
     Plugin 'mileszs/ack.vim'
+    Plugin 'google/vim-searchindex'
   " }
   call vundle#end()
   filetype plugin indent on
