@@ -156,11 +156,11 @@
     Plugin 'vim-airline/vim-airline'
     Plugin 'vim-airline/vim-airline-themes'
     Plugin 'Lokaltog/vim-easymotion'
-    Plugin 'Shougo/neocomplcache.vim'
+    Plugin 'zxqfl/tabnine-vim'
     Plugin 'godlygeek/tabular'
     Plugin 'MarcWeber/vim-addon-mw-utils'
     Plugin 'tomtom/tlib_vim'
-    Plugin 'kien/ctrlp.vim'
+    Plugin 'ctrlpvim/ctrlp.vim'
     Plugin 'scrooloose/nerdtree'
     Plugin 'scrooloose/syntastic'
     Plugin 'kien/rainbow_parentheses.vim'
@@ -182,21 +182,12 @@
     Plugin 'mileszs/ack.vim'
     Plugin 'google/vim-searchindex'
     Plugin 'morhetz/gruvbox'
+    Plugin 'mtth/scratch.vim'
   " }
   call vundle#end()
   filetype plugin indent on
 
   " Bundles Setting {
-
-    " Neocomplcache 
-    let g:acp_enableAtStartup = 0
-    " Use neocomplcache.
-    let g:neocomplcache_enable_at_startup = 1
-    " Use smartcase.
-    let g:neocomplcache_enable_smart_case = 1
-    " Set minimum syntax keyword length.
-    let g:neocomplcache_min_syntax_length = 3
-    let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
     " Toggle TagBar
     map <silent> <leader>l :TagbarToggle<cr>
@@ -235,6 +226,8 @@
 
     " Vim Powerline
     let g:Powerline_symbols='fancy'
+    let g:airline_powerline_fonts = 1
+    let g:airline_theme='base16'
 
   " }
 " }
@@ -248,9 +241,9 @@
   set linebreak
   set nolist
   if has("mac")
-    set guifont=Fantasque\ Sans\ Mono:h12
+    set guifont=Fira\ Mono\ for\ Powerline:h12
   elseif has("win32") || has("win64")
-    set guifont=Fantasque\ Sans\ Mono:h12
+    set guifont=Fira\ Mono\ for\ Powerline:h12
   elseif has("unix")
     set guifont=DroidSansMono\ 12
   endif
