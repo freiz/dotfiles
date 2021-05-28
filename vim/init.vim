@@ -7,6 +7,7 @@
 
     set nocompatible
     set number 
+    set relativenumber
     set hidden
     set wildmenu
     set autowrite
@@ -156,7 +157,8 @@
     Plugin 'vim-airline/vim-airline'
     Plugin 'vim-airline/vim-airline-themes'
     Plugin 'Lokaltog/vim-easymotion'
-    Plugin 'zxqfl/tabnine-vim'
+    Plugin 'codota/tabnine-vim'
+    Plugin 'python-mode/python-mode'
     Plugin 'godlygeek/tabular'
     Plugin 'MarcWeber/vim-addon-mw-utils'
     Plugin 'tomtom/tlib_vim'
@@ -172,7 +174,6 @@
     Plugin 'Auto-Pairs'
     Plugin 'The-NERD-Commenter'
     Plugin 'quit-another-window'
-    Plugin 'klen/python-mode'
     Plugin 'vim-pandoc/vim-pandoc'
     Plugin 'vim-pandoc/vim-pandoc-syntax'
     Plugin 'raichoo/haskell-vim'
@@ -292,6 +293,17 @@
 
   " Quick jump to buffer list
   nnoremap <leader>b :buffers<CR>:buffer<Space>
+
+  " SHIFT-Del are Cut
+  vnoremap <S-Del> "+x
+
+  " CTRL-Insert are Copy
+  vnoremap <C-Insert> "+y
+
+  " SHIFT-Insert are Paste
+  map <S-Insert>      "+gP
+  cmap <S-Insert>     <C-R>+
+
 " }
 
 " Autocmd {
@@ -300,3 +312,5 @@
   autocmd BufRead,BufNewFile *.rs set filetype=rust
   autocmd BufRead,BufNewFile *.nim set filetype=nim
 " }
+
+
