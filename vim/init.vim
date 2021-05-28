@@ -163,7 +163,7 @@
     Plugin 'MarcWeber/vim-addon-mw-utils'
     Plugin 'tomtom/tlib_vim'
     Plugin 'ctrlpvim/ctrlp.vim'
-    Plugin 'scrooloose/nerdtree'
+    Plugin 'preservim/nerdtree'
     Plugin 'scrooloose/syntastic'
     Plugin 'kien/rainbow_parentheses.vim'
     Plugin 'vim-scripts/matchit.zip'
@@ -175,7 +175,6 @@
     Plugin 'The-NERD-Commenter'
     Plugin 'quit-another-window'
     Plugin 'vim-pandoc/vim-pandoc'
-    Plugin 'vim-pandoc/vim-pandoc-syntax'
     Plugin 'raichoo/haskell-vim'
     Plugin 'zah/nim.vim'
     Plugin 'thinca/vim-quickrun'
@@ -183,7 +182,9 @@
     Plugin 'mileszs/ack.vim'
     Plugin 'google/vim-searchindex'
     Plugin 'morhetz/gruvbox'
+    Plugin 'muellan/am-colors'
     Plugin 'mtth/scratch.vim'
+    Plugin 'iamcco/markdown-preview.nvim'
   " }
   call vundle#end()
   filetype plugin indent on
@@ -249,7 +250,7 @@
     set guifont=DroidSansMono\ 12
   endif
   set background=dark
-  colorscheme gruvbox
+  colorscheme amdark
 "}
 
 " Key Mappings {
@@ -303,6 +304,7 @@
   " SHIFT-Insert are Paste
   map <S-Insert>      "+gP
   cmap <S-Insert>     <C-R>+
+  imap <S-Insert>     <C-R>+
 
 " }
 
