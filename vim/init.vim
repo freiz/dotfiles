@@ -11,6 +11,7 @@
     set hidden
     set wildmenu
     set autowrite
+    set autochdir
     set showmatch
     set ignorecase
     set smartcase
