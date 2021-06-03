@@ -10,6 +10,7 @@
     set relativenumber
     set hidden
     set wildmenu
+    set autoread
     set autowrite
     set autochdir
     set showmatch
