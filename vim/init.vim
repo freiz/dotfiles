@@ -1,12 +1,7 @@
-" Modeline and Notes {
-" vim: set foldmethod=marker foldmarker={,} foldlevel=0:
-" }
-
 " Environment {
   " Basic {
-
     set nocompatible
-    set number 
+    set number
     set relativenumber
     set hidden
     set wildmenu
@@ -41,10 +36,10 @@
     set fileformat=unix
     set completeopt=longest,menu
     set backspace=indent,eol,start
+    set clipboard+=unnamedplus
   " }
-  
-  " Tab & Indent {
 
+  " Tab & Indent {
     set autoindent
     set copyindent
     set smartindent
@@ -56,25 +51,23 @@
   " }
 
   " Folding {
-
-    set foldenable
-    set foldmethod=syntax 
-    set foldlevel=1
-    set foldnestmax=3
-    set foldcolumn=3
+    set foldmethod=expr
+    set foldexpr=nvim_treesitter#foldexpr()
+    set foldlevel=99
+    set nofoldenable
   " }
 
   " Codecs {
-
     set encoding=utf-8
     set fileencodings=utf-8,ucs-bom,gbk,gb18030,utf-16,big5
 
     source $VIMRUNTIME/delmenu.vim
     source $VIMRUNTIME/menu.vim
   "}
+" }
 
-  " Emacs Emulating {
-    " Simple navigation and editing key bindings from emacs, for Vim.  
+ " Emacs Emulating {
+    " Simple navigation and editing key bindings from emacs, for Vim.
     " Inspired by a much more comprehensive plugin: Vimacs, by Andre Pang.
 
     function! s:home()
@@ -109,7 +102,7 @@
     inoremap <silent> <Plug>emacs_delete_word_backwards <Space><Left><C-o>db<Del>
 
     " on macvim, use option as meta key
-    if has("gui_macvim")
+    if has("mac")
       set macmeta
     endif
 
@@ -148,111 +141,80 @@
     cnoremap <M-d> <C-f>de<C-c>
     cnoremap <C-k> <C-f>D<C-c><End>
   " }
-" }
 
 " Plugins And Settings {
+  " Install vim-plug if not found
+  if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  endif
 
-  set rtp+=~/.vim/bundle/Vundle.vim/
-  call vundle#begin()
+  " Run PlugInstall if there are missing plugins
+  autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+    \| PlugInstall --sync | source $MYVIMRC
+  \| endif
+
+  call plug#begin('~/.local/share/nvim/plugged')
   " Plugins {
-    Plugin 'VundleVim/Vundle.vim'
-    Plugin 'vim-airline/vim-airline'
-    Plugin 'vim-airline/vim-airline-themes'
-    Plugin 'Lokaltog/vim-easymotion'
-    Plugin 'codota/tabnine-vim'
-    Plugin 'python-mode/python-mode'
-    Plugin 'godlygeek/tabular'
-    Plugin 'MarcWeber/vim-addon-mw-utils'
-    Plugin 'tomtom/tlib_vim'
-    Plugin 'ctrlpvim/ctrlp.vim'
-    Plugin 'preservim/nerdtree'
-    Plugin 'scrooloose/syntastic'
-    Plugin 'kien/rainbow_parentheses.vim'
-    Plugin 'vim-scripts/matchit.zip'
-    Plugin 'terryma/vim-expand-region'
-    Plugin 'freiz/c.vim'
-    Plugin 'a.vim'
-    Plugin 'majutsushi/tagbar'
-    Plugin 'Auto-Pairs'
-    Plugin 'The-NERD-Commenter'
-    Plugin 'quit-another-window'
-    Plugin 'vim-pandoc/vim-pandoc'
-    Plugin 'raichoo/haskell-vim'
-    Plugin 'zah/nim.vim'
-    Plugin 'thinca/vim-quickrun'
-    Plugin 'tpope/vim-fugitive'
-    Plugin 'mileszs/ack.vim'
-    Plugin 'google/vim-searchindex'
-    Plugin 'morhetz/gruvbox'
-    Plugin 'muellan/am-colors'
-    Plugin 'mtth/scratch.vim'
-    Plugin 'iamcco/markdown-preview.nvim'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'easymotion/vim-easymotion'
+    Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+    Plug 'godlygeek/tabular'
+    Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'preservim/nerdtree'
+    Plug 'dense-analysis/ale'
+    Plug 'luochen1990/rainbow'
+    Plug 'andymass/vim-matchup'
+    Plug 'terryma/vim-expand-region'
+    Plug 'preservim/tagbar'
+    Plug 'jiangmiao/auto-pairs'
+    Plug 'preservim/nerdcommenter'
+    Plug 'vim-pandoc/vim-pandoc'
+    Plug 'thinca/vim-quickrun'
+    Plug 'tpope/vim-fugitive'
+    Plug 'mileszs/ack.vim'
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'google/vim-searchindex'
+    Plug 'morhetz/gruvbox'
+    Plug 'mtth/scratch.vim'
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
   " }
-  call vundle#end()
-  filetype plugin indent on
+  call plug#end()
 
   " Bundles Setting {
-
-    " Toggle TagBar
+  
+  " TagBar
     map <silent> <leader>l :TagbarToggle<cr>
-
-    " NerdTree Setting
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+  
+  " NERDTree
     map <silent> <leader>n :NERDTreeToggle<cr>
-
-    " Rainbow Parentheses Setting
-    let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
-
-    let g:rbpt_max = 16
-    let g:rbpt_loadcmd_toggle = 0
-
-    autocmd VimEnter * RainbowParenthesesToggle
-    autocmd Syntax * RainbowParenthesesLoadRound
-    autocmd Syntax * RainbowParenthesesLoadSquare
-    autocmd Syntax * RainbowParenthesesLoadBraces
 
     " Vim Powerline
     let g:Powerline_symbols='fancy'
     let g:airline_powerline_fonts = 1
-    let g:airline_theme='base16'
-
-  " }
+    let g:airline_theme='gruvbox'
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#formatter = 'default'
+    let g:airline_section_b = '%{getcwd()}'
+    let g:airline#extensions#tabline#fnamemod = ':t'
 " }
 
-" Appearence {
-
-  set go-=m
-  set go-=T
+" Appearance {
+  set termguicolors
   set cursorline
   set wrap
   set linebreak
   set nolist
   if has("mac")
-    set guifont=Fira\ Mono\ for\ Powerline:h12
+    set guifont=Fira\ Mono\ for\ Powerline:h14
   elseif has("win32") || has("win64")
-    set guifont=Fira\ Mono\ for\ Powerline:h12
+    set guifont=Fira\ Mono\ for\ Powerline:h14
   elseif has("unix")
-    set guifont=DroidSansMono\ 12
+    set guifont=DroidSansMono\ 14
   endif
   set background=dark
-  colorscheme amdark
+  colorscheme gruvbox
 "}
 
 " Key Mappings {
@@ -284,7 +246,7 @@
   nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
   vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 
-  " j,k on wrapped lines 
+  " j,k on wrapped lines
   nnoremap j gj
   nnoremap k gk
 
@@ -297,16 +259,46 @@
   " Quick jump to buffer list
   nnoremap <leader>b :buffers<CR>:buffer<Space>
 
-  " SHIFT-Del are Cut
-  vnoremap <S-Del> "+x
+  " Copy & Paste keybindings
+  if has('mac')
+      " macOS keybindings
+      vnoremap <D-c> "+y
+      nnoremap <D-c> "+yy
+      inoremap <D-c> <Esc>"+yyi
 
-  " CTRL-Insert are Copy
-  vnoremap <C-Insert> "+y
+      vnoremap <D-v> "+p
+      nnoremap <D-v> "+p
+      inoremap <D-v> <Esc>"+pa
 
-  " SHIFT-Insert are Paste
-  map <S-Insert>      "+gP
-  cmap <S-Insert>     <C-R>+
-  imap <S-Insert>     <C-R>+
+      vnoremap <D-x> "+d
+      nnoremap <D-x> "+dd
+      inoremap <D-x> <Esc>"+ddi
+
+      nnoremap <D-z> u
+      inoremap <D-z> <Esc>ua
+
+      nnoremap <D-y> <C-r>
+      inoremap <D-y> <Esc><C-r>a
+  else
+      " Non-macOS keybindings (Linux, Windows, etc.)
+      vnoremap <C-c> "+y
+      nnoremap <C-c> "+yy
+      inoremap <C-c> <Esc>"+yyi
+
+      vnoremap <C-v> "+p
+      nnoremap <C-v> "+p
+      inoremap <C-v> <Esc>"+pa
+
+      vnoremap <C-x> "+d
+      nnoremap <C-x> "+dd
+      inoremap <C-x> <Esc>"+ddi
+
+      nnoremap <C-z> u
+      inoremap <C-z> <Esc>ua
+
+      nnoremap <C-y> <C-r>
+      inoremap <C-y> <Esc><C-r>a
+  endif
 
 " }
 
@@ -316,5 +308,3 @@
   autocmd BufRead,BufNewFile *.rs set filetype=rust
   autocmd BufRead,BufNewFile *.nim set filetype=nim
 " }
-
-
